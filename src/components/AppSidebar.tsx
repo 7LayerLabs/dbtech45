@@ -41,6 +41,7 @@ import {
   DollarSign,
   BookOpen,
   BarChart3,
+  MessageSquare,
 } from 'lucide-react';
 
 // â”€â”€â”€ Colors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -117,6 +118,13 @@ const NAV_ICONS: Record<string, ReactNode> = {
   'Brand Spec':    <Ruler size={ICON_SIZE} />,
   'Quick Links':   <Link2 size={ICON_SIZE} />,
   'Research':      <Search size={ICON_SIZE} />,
+  'Mission Control': <Crosshair size={ICON_SIZE} />,
+  'Dashboard': <LayoutDashboard size={ICON_SIZE} />,
+  'Chat': <MessageSquare size={ICON_SIZE} />,
+  'Agents': <Users size={ICON_SIZE} />,
+  'Task Board': <CheckSquare size={ICON_SIZE} />,
+  'Activity Feed': <Activity size={ICON_SIZE} />,
+  'Usage & Costs': <DollarSign size={ICON_SIZE} />,
   'D.U.N.D.E.R.':  <Building2 size={ICON_SIZE} />,
   'YT Transcript': <Youtube size={ICON_SIZE} />,
   'YT CLIPD':      <Youtube size={ICON_SIZE} />,
@@ -149,6 +157,15 @@ const financeItems: NavItem[] = [
 
 
 
+const missionControlItems: NavItem[] = [
+  { label: 'Dashboard', href: '/os/mission-control' },
+  { label: 'Chat', href: '/os/mission-control/chat' },
+  { label: 'Agents', href: '/os/mission-control/agents' },
+  { label: 'Task Board', href: '/os/mission-control/tasks' },
+  { label: 'Activity Feed', href: '/os/mission-control/activity' },
+  { label: 'Usage & Costs', href: '/os/mission-control/tokens' },
+];
+
 const opsItems: NavItem[] = [
   { label: 'Activity Dashboard', href: '/os/activity-dashboard' },
   { label: 'Overnight', href: '/os/agents/overnight' },
@@ -179,10 +196,11 @@ interface SectionConfig {
 }
 
 const sections: SectionConfig[] = [
-  { key: 'dashboard', number: '01', title: 'DASHBOARD', items: dashboardItems },
-  { key: 'operations', number: '02', title: 'OPERATIONS', items: opsItems },
-  { key: 'intel', number: '03', title: 'INTEL', items: intelItems },
-  { key: 'system', number: '04', title: 'SYSTEM CONFIG', items: systemItems },
+  { key: 'missioncontrol', number: '01', title: 'MISSION CONTROL', items: missionControlItems },
+  { key: 'dashboard', number: '02', title: 'DASHBOARD', items: dashboardItems },
+  { key: 'operations', number: '03', title: 'OPERATIONS', items: opsItems },
+  { key: 'intel', number: '04', title: 'INTEL', items: intelItems },
+  { key: 'system', number: '05', title: 'SYSTEM CONFIG', items: systemItems },
 ];
 
 // â”€â”€â”€ Constants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -193,7 +211,7 @@ const SIDEBAR_WIDTH = 280;
 const COLLAPSED_WIDTH = 60;
 
 type SectionState = Record<string, boolean>;
-const DEFAULT_SECTIONS: SectionState = { dashboard: true, operations: false, intel: false, system: false };
+const DEFAULT_SECTIONS: SectionState = { missioncontrol: true, dashboard: false, operations: false, intel: false, system: false };
 
 export default function AppSidebar({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
