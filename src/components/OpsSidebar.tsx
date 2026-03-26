@@ -15,6 +15,7 @@ import {
   Sparkles,
   Moon,
   Sun,
+  Radio,
 } from 'lucide-react';
 
 const voidTheme = {
@@ -51,6 +52,7 @@ const navItems: NavItem[] = [
   { label: 'OPS Home', href: '/ops', icon: Home },
   { label: 'Projects', href: '/os/projects', icon: Lightbulb },
   { label: 'Clipd', href: '/ops/clipd', icon: Youtube },
+  { label: 'Podsnap', href: '/ops/podsnap', icon: Radio },
   { label: 'Research', href: '/ops/research', icon: Search },
   { label: 'X Clipd', href: '/ops/x-clipd', icon: Sparkles },
 ];

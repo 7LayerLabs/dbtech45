@@ -1,4 +1,82 @@
 {
-  "activity": [],
-  "generatedAt": "2026-03-25T16:24:46.792Z"
+  "activity": [
+    {
+      "type": "commit",
+      "id": "a859bc70",
+      "author": "Milo",
+      "timestamp": "2026-03-25 12:29:08 -0400",
+      "message": "feat: mission control module + supabase integration"
+    },
+    {
+      "type": "commit",
+      "id": "5e49e603",
+      "author": "Milo",
+      "timestamp": "2026-03-20 21:40:36 -0400",
+      "message": "chore: update data files (activity, agent-configs, ops-status, skills)"
+    },
+    {
+      "type": "commit",
+      "id": "2476458f",
+      "author": "Milo",
+      "timestamp": "2026-03-20 19:31:46 -0400",
+      "message": "refactor: restructure /os → /ops + /agents sections, new API routes, Stitch integration, usage gauge"
+    },
+    {
+      "type": "commit",
+      "id": "b645f607",
+      "author": "Milo",
+      "timestamp": "2026-03-20 13:44:28 -0400",
+      "message": "fix(org-structure): 3 cols x 2 rows — Exec/Command/Creative top, Personal/Growth/Ops bottom"
+    },
+    {
+      "type": "commit",
+      "id": "6cdb803c",
+      "author": "Milo",
+      "timestamp": "2026-03-20 13:43:19 -0400",
+      "message": "fix(org-structure): 2-col 3-row layout, Growth moved under Command, fits on screen"
+    },
+    {
+      "type": "commit",
+      "id": "ea6bcd8c",
+      "author": "Milo",
+      "timestamp": "2026-03-20 13:35:57 -0400",
+      "message": "fix(org-structure): correct hierarchy — Derek→Wendy direct, Derek→Command→wings, equal node sizing"
+    },
+    {
+      "type": "commit",
+      "id": "7f07577f",
+      "author": "Milo",
+      "timestamp": "2026-03-20 13:30:06 -0400",
+      "message": "fix(org-structure): restore N8N canvas vibe — floating nodes on dot grid, real SVG wires"
+    },
+    {
+      "type": "commit",
+      "id": "94f30d14",
+      "author": "Milo",
+      "timestamp": "2026-03-20 13:27:24 -0400",
+      "message": "fix(org-structure): CSS grid layout, DOM-measured SVG connectors, no more clipping"
+    },
+    {
+      "type": "commit",
+      "id": "fdc94f72",
+      "author": "Milo",
+      "timestamp": "2026-03-20 13:23:24 -0400",
+      "message": "fix(org-structure): N8N orthogonal connectors, strip glow, tighten spacing"
+    },
+    {
+      "type": "commit",
+      "id": "0c2a3bf8",
+      "author": "Milo",
+      "timestamp": "2026-03-20 12:28:57 -0400",
+      "message": "feat(org-chart): N8N-style orthogonal connectors, pan/zoom canvas, dot grid background"
+    },
+    {
+      "type": "commit",
+      "id": "8ea42655",
+      "author": "Milo",
+      "timestamp": "2026-03-19 11:12:38 -0400",
+      "message": "Remove usage gauges from sidebar"
+    }
+  ],
+  "generatedAt": "2026-03-26T14:24:09.120Z"
 }
