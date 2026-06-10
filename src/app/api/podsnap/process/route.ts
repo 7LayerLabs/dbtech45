@@ -35,7 +35,7 @@ async function transcribeFile(audioPath: string): Promise<string> {
   for (let i = 0; i < chunks.length; i++) {
     const chunk = chunks[i];
     const formData = new FormData();
-    const blob = new Blob([chunk], { type: 'audio/mpeg' });
+    const blob = new Blob([new Uint8Array(chunk)], { type: 'audio/mpeg' });
     formData.append('file', blob, `chunk-${i}.mp3`);
     formData.append('model', 'whisper-1');
     formData.append('response_format', 'text');
