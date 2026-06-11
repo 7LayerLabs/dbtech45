@@ -18,11 +18,12 @@ Shared reference for Milo, Anders, and all agents.
 ## Supabase
 - **Org:** DBTech45
 - **Project:** dbtech45-os
-- **Project ID:** ltoejmkktovxrsqtopeg
-- **URL:** https://ltoejmkktovxrsqtopeg.supabase.co
-- **Dashboard:** https://supabase.com/dashboard/project/ltoejmkktovxrsqtopeg
+- **Project ID:** hnkjhhabebzmcwwhhfeu
+- **URL:** https://hnkjhhabebzmcwwhhfeu.supabase.co
+- **Dashboard:** https://supabase.com/dashboard/project/hnkjhhabebzmcwwhhfeu
 - **Region:** us-west-2 (AWS)
-- **Publishable Key:** sb_publishable_ND8fT4N584D9SY9Zoxs61Q_Ln-bUlMo
+- **Publishable Key:** sb_publishable_bSWy7hZPLEwilatHxnIzpw_re3uWe-V
+- **Note (2026-06-11):** Repointed from dead project `ltoejmkktovxrsqtopeg` to new project above. Tables `calendar_tasks` + `todos` recreated; RLS verified for anon read/write.
 
 ## Database Tables
 | Table | Purpose |

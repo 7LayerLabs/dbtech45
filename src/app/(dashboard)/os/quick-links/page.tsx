@@ -4,7 +4,7 @@ const groups = [
   { title: "DBTech Infrastructure", links: [
     { label: "Vercel Dashboard (DBTech45)", url: "https://vercel.com/milos-projects-b55f88cf/dbtech45" },
     { label: "GitHub Repo (dbtech45)", url: "https://github.com/Milobuilds45/dbtech45" },
-    { label: "Supabase Console (dbtech45-os)", url: "https://supabase.com/dashboard/project/ltoejmkktovxrsqtopeg" },
+    { label: "Supabase Console (dbtech45-os)", url: "https://supabase.com/dashboard/project/hnkjhhabebzmcwwhhfeu" },
     { label: "Live Site", url: "https://dbtech45.vercel.app" },
   ]},
   { title: "Development", links: [
