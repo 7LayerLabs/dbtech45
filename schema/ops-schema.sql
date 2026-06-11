@@ -1,6 +1,6 @@
 -- ═══════════════════════════════════════════════════════════════════════
 -- Ops Dashboard — Postgres Schema (Supabase)
--- Project: dbtech45-os (ltoejmkktovxrsqtopeg)
+-- Project: dbtech45-os (hnkjhhabebzmcwwhhfeu)
 -- ═══════════════════════════════════════════════════════════════════════
 
 -- Models (LLM fleet configuration)
