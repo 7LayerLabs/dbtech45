@@ -38,15 +38,18 @@ const nextConfig: NextConfig = {
           destination: "https://soulsolace.vercel.app/soulsolace/:path*",
         },
       ],
-      // fallback: only proxy to Hetzner if no Next.js page matches
+      // fallback: for any /os/* path with no matching Next.js page, serve the
+      // canonical /ops/* page. (Previously proxied to a Hetzner box that is now
+      // dead and never actually served the site — that caused 502s on
+      // /os/calendar and /os/kanban, whose real pages live under /ops/.)
       fallback: [
         {
           source: "/os",
-          destination: "http://qs0cowgkgs0w48oc88kswooc.178.156.253.81.sslip.io/",
+          destination: "/ops",
         },
         {
           source: "/os/:path*",
-          destination: "http://qs0cowgkgs0w48oc88kswooc.178.156.253.81.sslip.io/:path*",
+          destination: "/ops/:path*",
         },
       ],
     };
