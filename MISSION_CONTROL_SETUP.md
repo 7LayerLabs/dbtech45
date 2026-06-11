@@ -8,7 +8,7 @@
 
 ## Step 1: Run Database Migration
 
-1. Go to https://supabase.com/dashboard/project/ltoejmkktovxrsqtopeg
+1. Go to https://supabase.com/dashboard/project/hnkjhhabebzmcwwhhfeu
 2. Click **"SQL Editor"** in left sidebar
 3. Click **"New query"**
 4. Copy the SQL from `supabase/migrations/20260321_mission_control.sql`
