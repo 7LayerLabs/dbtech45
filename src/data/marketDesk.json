@@ -1,0 +1,134 @@
+{
+  "asOf": "2026-07-24T16:00:00-04:00",
+  "sentiment": {
+    "label": "Cautious",
+    "explanation": "Stocks are still holding up, but oil near $100, high interest rates, and expensive technology shares leave very little room for bad surprises. This is not panic; it is a market walking carefully."
+  },
+  "vix": {
+    "value": "18.58",
+    "explanation": "The VIX is Wall Street's fear meter. Below 20 usually means investors are concerned but not panicking. A fast move above 20 would signal that traders are buying more protection.",
+    "source": {
+      "label": "CappNotes closing data",
+      "url": "https://cappnotes.substack.com/p/closing-look-72426"
+    }
+  },
+  "tenYear": {
+    "value": "4.69%",
+    "explanation": "The 10-year Treasury yield influences mortgages, business loans, and what investors are willing to pay for stocks. When it rises, borrowing gets more expensive and future company profits look less valuable today.",
+    "source": {
+      "label": "Advisor Perspectives yield snapshot",
+      "url": "https://www.advisorperspectives.com/dshort/updates/2026/07/24/treasury-yields-snapshot-july-24-2026"
+    }
+  },
+  "stockNews": [
+    {
+      "headline": "Big Tech now has to prove its massive AI spending will make money",
+      "brief": "Alphabet and Tesla sold off after earnings even though parts of their businesses were growing. Investors focused instead on rising AI spending and weaker cash flow, putting Microsoft, Meta, and Amazon under the same microscope next week.",
+      "beginnerTakeaway": "A company can report higher sales and still have its stock fall. The stock price reflects expectations; if investors expected perfection, merely good results can disappoint them.",
+      "url": "https://economictimes.indiatimes.com/markets/stocks/news/wall-street-week-ahead-us-stocks-face-tests-from-fed-decision-tech-led-earnings-deluge/articleshow/132618500.cms",
+      "sourceLabel": "Reuters"
+    },
+    {
+      "headline": "Oil and high interest rates are pressing on growth stocks",
+      "brief": "Brent oil pulled back below $100 on Friday, but the 10-year yield remained near an 18-month high. Investors are worried that expensive energy could keep inflation high and force the Federal Reserve to maintain or raise rates.",
+      "beginnerTakeaway": "High-growth stocks are valued on profits expected years from now. Higher interest rates reduce what those far-away profits are worth today, so technology shares often feel the pressure first.",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/stocks-mixed-as-oil-prices-pause-climb-but-yields-hover-near-highs/articleshow/132618760.cms",
+      "sourceLabel": "Reuters"
+    },
+    {
+      "headline": "Intel fell despite stronger revenue because spending is rising",
+      "brief": "Intel reported its fastest revenue growth in years but the stock dropped roughly 8% after management raised its capital-spending plans. The market is demanding evidence that expensive factories and AI infrastructure will produce enough profit.",
+      "beginnerTakeaway": "Revenue is money coming in; profit and free cash flow show what remains after costs and investment. Investors care about all three, not just sales growth.",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/news/stocks-mixed-as-oil-prices-pause-climb-but-yields-hover-near-highs/articleshow/132618760.cms",
+      "sourceLabel": "Reuters"
+    }
+  ],
+  "earnings": [
+    {
+      "ticker": "MSFT",
+      "company": "Microsoft",
+      "date": "Wednesday, July 29 · after market close",
+      "whatItDoes": "Microsoft sells Windows, Office, business software, and Azure cloud computing.",
+      "whatToWatch": "Azure growth, AI revenue, and whether the company is earning enough from the enormous amount it spends on data centers.",
+      "beginnerTakeaway": "Earnings explain the last three months. Guidance is management's forecast for what comes next—and guidance often moves the stock more than the reported numbers.",
+      "source": {
+        "label": "Investing Calendar",
+        "url": "https://investingcalendar.com/next-weeks-biggest-earnings"
+      }
+    },
+    {
+      "ticker": "META",
+      "company": "Meta Platforms",
+      "date": "Wednesday, July 29 · after market close",
+      "whatItDoes": "Meta owns Facebook, Instagram, WhatsApp, and a large digital advertising business.",
+      "whatToWatch": "Advertising growth, AI-driven engagement, and whether spending on data centers and models is growing faster than cash flow.",
+      "beginnerTakeaway": "If revenue beats expectations but costs rise even faster, investors may still sell the stock. More business does not automatically mean more profit.",
+      "source": {
+        "label": "Investing Calendar",
+        "url": "https://investingcalendar.com/next-weeks-biggest-earnings"
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "company": "Apple",
+      "date": "Thursday, July 30 · after market close",
+      "whatItDoes": "Apple sells iPhones, Macs, wearables, and recurring services such as iCloud and the App Store.",
+      "whatToWatch": "iPhone demand, services growth, profit margins, and what management says about AI products and China.",
+      "beginnerTakeaway": "Profit margin is the percentage of sales left after costs. A company can sell more products but earn less if those products are less profitable.",
+      "source": {
+        "label": "Investing Calendar",
+        "url": "https://investingcalendar.com/next-weeks-biggest-earnings"
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "company": "Amazon",
+      "date": "Thursday, July 30 · after market close",
+      "whatItDoes": "Amazon runs online retail, advertising, logistics, and AWS cloud computing.",
+      "whatToWatch": "AWS growth, retail margins, and whether AI infrastructure spending is producing enough new cloud revenue.",
+      "beginnerTakeaway": "Amazon has several businesses. A weak retail quarter can be offset by strong cloud profits, so investors look underneath the headline total.",
+      "source": {
+        "label": "Investing Calendar",
+        "url": "https://investingcalendar.com/next-weeks-biggest-earnings"
+      }
+    }
+  ],
+  "ipos": [
+    {
+      "ticker": "IOND",
+      "company": "Ionic Digital",
+      "expectedDate": "Tuesday, July 28",
+      "priceRange": "Direct listing · no traditional IPO range",
+      "whatItDoes": "Ionic owns data-center infrastructure and remaining bitcoin-mining operations created from Celsius Mining's bankruptcy assets.",
+      "beginnerTakeaway": "A direct listing lets existing shares begin trading without the company selling a normal batch of new IPO shares. With no underwriter-set offer price, early trading can be especially jumpy.",
+      "source": {
+        "label": "Renaissance Capital",
+        "url": "https://www.renaissancecapital.com/IPO-Center/News/120693/US-IPO-Week-Ahead-Jersey-Mikes-Reformation-and-Ionic-Digital-set-to-close-o"
+      }
+    },
+    {
+      "ticker": "JMKE",
+      "company": "Jersey Mike's Subs",
+      "expectedDate": "Thursday, July 30",
+      "priceRange": "$21–$25 expected range",
+      "whatItDoes": "Jersey Mike's is a sandwich franchise that earns much of its money from royalties and advertising fees tied to restaurant sales.",
+      "beginnerTakeaway": "The price range is an estimate, not a guaranteed trading price. The business has attractive franchise economics, but its debt and first-day excitement can make the stock expensive quickly.",
+      "source": {
+        "label": "Renaissance Capital",
+        "url": "https://www.renaissancecapital.com/IPO-Center/News/120693/US-IPO-Week-Ahead-Jersey-Mikes-Reformation-and-Ionic-Digital-set-to-close-o"
+      }
+    },
+    {
+      "ticker": "REF",
+      "company": "Reformation",
+      "expectedDate": "Thursday, July 30",
+      "priceRange": "$15–$17 expected range",
+      "whatItDoes": "Reformation sells fashion online and through roughly 70 stores, using small production runs to test demand.",
+      "beginnerTakeaway": "Fashion can grow fast but tastes change quickly. IPO buyers are betting that the brand can stay popular after the excitement of going public fades.",
+      "source": {
+        "label": "Renaissance Capital",
+        "url": "https://www.renaissancecapital.com/IPO-Center/News/120693/US-IPO-Week-Ahead-Jersey-Mikes-Reformation-and-Ionic-Digital-set-to-close-o"
+      }
+    }
+  ]
+}

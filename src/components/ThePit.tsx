@@ -1,5 +1,14 @@
 "use client";
+
 import { useEffect, useRef } from "react";
+import marketDesk from "@/data/marketDesk.json";
+
+const updatedDate = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "America/New_York",
+}).format(new Date(marketDesk.asOf));
 
 export default function ThePit() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -11,104 +20,158 @@ export default function ThePit() {
           if (entry.isIntersecting) entry.target.classList.add("visible");
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 },
     );
-    if (sectionRef.current) {
-      sectionRef.current.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-    }
+
+    const section = sectionRef.current;
+    section?.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, []);
-
-  const ticker = [
-    { symbol: "ES",  price: "5,487.25",  change: "+0.82%", up: true },
-    { symbol: "NQ",  price: "19,812.50", change: "+1.14%", up: true },
-    { symbol: "SPY", price: "547.32",    change: "+0.76%", up: true },
-    { symbol: "VIX", price: "14.28",     change: "-3.12%", up: false },
-    { symbol: "GC",  price: "2,341.80",  change: "+0.34%", up: true },
-    { symbol: "BTC", price: "67,842",    change: "+2.41%", up: true },
-    { symbol: "10Y", price: "4.287",     change: "-0.58%", up: false },
-    { symbol: "DXY", price: "104.32",    change: "-0.21%", up: false },
-  ];
-
-  const signals = [
-    { time: "09:34 ET", level: "INFO", text: "ES breaking above 5,480 resistance. Watching for retest and hold." },
-    { time: "08:15 ET", level: "WARN", text: "VIX compression to 14 handle. Complacency zone, hedges cheap here." },
-    { time: "07:02 ET", level: "HOT",  text: "BTC reclaiming 67K with volume. Momentum flip confirmed on 4H." },
-  ];
 
   return (
     <>
       <div className="splatter" aria-hidden="true" />
-      <section className="ink-section" id="pit" aria-label="The Pit" ref={sectionRef}>
+      <section className="ink-section pit" id="pit" aria-label="The Pit market guide" ref={sectionRef}>
         <div className="wrap">
-          <div className="reveal" style={{ textAlign: "center", marginBottom: 32 }}>
-            <span className="eyebrow">market status</span>
-            <h2 className="display-md">The Pit</h2>
-            <p style={{ fontSize: 18, marginTop: 12 }}>
-              Futures, macro, conviction trades. Where the edge lives.
-            </p>
+          <header className="pit-heading reveal">
+            <div>
+              <span className="eyebrow">markets in plain English</span>
+              <h2 className="display-md">The Pit</h2>
+              <p>What moved, what is coming, and why a beginner should care.</p>
+            </div>
+            <time dateTime={marketDesk.asOf}>
+              Data through {updatedDate}
+              <span>Refreshed with the 7 PM edition</span>
+            </time>
+          </header>
+
+          <div className="pit-sentiment-grid reveal">
+            <article className="pit-sentiment-card pit-sentiment-main">
+              <span className="pit-card-label">Market sentiment</span>
+              <strong>{marketDesk.sentiment.label}</strong>
+              <p>{marketDesk.sentiment.explanation}</p>
+            </article>
+
+            <article className="pit-sentiment-card">
+              <span className="pit-card-label">VIX · fear meter</span>
+              <strong>{marketDesk.vix.value}</strong>
+              <p>{marketDesk.vix.explanation}</p>
+              <a href={marketDesk.vix.source.url} target="_blank" rel="noopener noreferrer">
+                Source: {marketDesk.vix.source.label} ↗
+              </a>
+            </article>
+
+            <article className="pit-sentiment-card">
+              <span className="pit-card-label">10-year Treasury yield</span>
+              <strong>{marketDesk.tenYear.value}</strong>
+              <p>{marketDesk.tenYear.explanation}</p>
+              <a href={marketDesk.tenYear.source.url} target="_blank" rel="noopener noreferrer">
+                Source: {marketDesk.tenYear.source.label} ↗
+              </a>
+            </article>
           </div>
 
-          <div className="ticker reveal" aria-label="Market ticker">
-            <div className="ticker-track">
-              {[...ticker, ...ticker].map((t, i) => (
-                <span key={i} style={{ display: "inline-flex", gap: 10, alignItems: "baseline" }}>
-                  <span>{t.symbol}</span>
-                  <span style={{ color: "#FFF8E1" }}>{t.price}</span>
-                  <span className={t.up ? "up" : "down"}>{t.change}</span>
-                </span>
+          <section className="pit-block reveal" aria-labelledby="pit-stock-news">
+            <div className="pit-block-heading">
+              <div>
+                <span className="eyebrow">the important moves</span>
+                <h3 id="pit-stock-news">Stock news, translated</h3>
+              </div>
+              <p>Not every headline matters. These are the stories changing what investors expect next.</p>
+            </div>
+
+            <div className="pit-news-list">
+              {marketDesk.stockNews.map((story, index) => (
+                <article className="pit-news-story" key={story.headline}>
+                  <span className="pit-story-number">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h4>
+                      <a href={story.url} target="_blank" rel="noopener noreferrer">
+                        {story.headline} ↗
+                      </a>
+                    </h4>
+                    <p>{story.brief}</p>
+                    <aside className="pit-translation">
+                      <span>What this means</span>
+                      <p>{story.beginnerTakeaway}</p>
+                    </aside>
+                    <small>Source: {story.sourceLabel}</small>
+                  </div>
+                </article>
               ))}
             </div>
-          </div>
+          </section>
 
-          <div className="two-col reveal" style={{ marginTop: 40, alignItems: "stretch" }}>
-            <div className="ink-card">
-              <div className="hand" style={{ fontSize: 26, marginBottom: 12 }}>Live signals</div>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {signals.map((s, i) => (
-                  <li key={i} style={{ borderTop: i ? "2px solid var(--ink)" : "none", padding: "14px 0" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-                      <span style={{ fontFamily: "'Alfa Slab One', Impact, sans-serif", fontSize: 12 }}>{s.time}</span>
-                      <span className={`pill ${s.level === "HOT" ? "live" : s.level === "WARN" ? "shaping" : "building"}`}>
-                        {s.level}
-                      </span>
-                    </div>
-                    <p style={{ fontSize: 15 }}>{s.text}</p>
-                  </li>
-                ))}
-              </ul>
+          <section className="pit-block reveal" aria-labelledby="pit-earnings">
+            <div className="pit-block-heading">
+              <div>
+                <span className="eyebrow">company report cards</span>
+                <h3 id="pit-earnings">Earnings coming up</h3>
+              </div>
+              <p>Earnings cover the last quarter. Guidance is management&apos;s forecast—and often moves the stock more.</p>
             </div>
 
-            <div style={{ display: "grid", gap: 16 }}>
-              <div className="ink-card">
-                <div className="hand" style={{ fontSize: 22, color: "var(--ink-soft)" }}>Market sentiment</div>
-                <div style={{ fontFamily: "'Alfa Slab One', Impact, sans-serif", fontSize: 40 }}>Bullish</div>
-                <div style={{ fontSize: 14 }}>Fear and Greed: 72</div>
-              </div>
-              <div className="ink-card">
-                <div className="hand" style={{ fontSize: 22, color: "var(--ink-soft)" }}>VIX</div>
-                <div style={{ fontFamily: "'Alfa Slab One', Impact, sans-serif", fontSize: 40 }}>14.28</div>
-                <div style={{ fontSize: 14 }}>Low volatility regime</div>
-              </div>
-              <div className="ink-card">
-                <div className="hand" style={{ fontSize: 22, color: "var(--ink-soft)" }}>10Y Yield</div>
-                <div style={{ fontFamily: "'Alfa Slab One', Impact, sans-serif", fontSize: 40 }}>4.287%</div>
-                <div style={{ fontSize: 14 }}>Watching the 4.30 level</div>
-              </div>
-            </div>
-          </div>
+            <dl className="pit-glossary" aria-label="Earnings terms">
+              <div><dt>Revenue</dt><dd>Total sales</dd></div>
+              <div><dt>EPS</dt><dd>Profit per share</dd></div>
+              <div><dt>Guidance</dt><dd>Management&apos;s forecast</dd></div>
+            </dl>
 
-          <div className="ink-card reveal" style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap", justifyContent: "space-between" }}>
-            <div style={{ flex: 1, minWidth: 220 }}>
-              <div style={{ fontFamily: "'Alfa Slab One', Impact, sans-serif", fontSize: 24 }}>Signal and Noise</div>
-              <p style={{ fontSize: 15 }}>Daily market intelligence. Filtered, actionable, no fluff.</p>
+            <div className="pit-card-grid">
+              {marketDesk.earnings.map((item) => (
+                <article className="pit-learning-card" key={item.ticker}>
+                  <header>
+                    <span className="pit-ticker">{item.ticker}</span>
+                    <time>{item.date}</time>
+                  </header>
+                  <h4>{item.company}</h4>
+                  <p>{item.whatItDoes}</p>
+                  <div className="pit-watch">
+                    <span>Watch this</span>
+                    <p>{item.whatToWatch}</p>
+                  </div>
+                  <aside className="pit-translation">
+                    <span>What this means</span>
+                    <p>{item.beginnerTakeaway}</p>
+                  </aside>
+                  <a href={item.source.url} target="_blank" rel="noopener noreferrer">
+                    {item.source.label} ↗
+                  </a>
+                </article>
+              ))}
             </div>
-            <a href="/newsletter/signal-noise" className="ink-btn">Get early access</a>
-          </div>
+          </section>
 
-          <p className="hand reveal" style={{ fontSize: 22, textAlign: "center", marginTop: 24, color: "var(--ink-soft)" }}>
-            Powered by Bobby, the trading desk in the swarm.
-          </p>
+          <section className="pit-block reveal" aria-labelledby="pit-ipos">
+            <div className="pit-block-heading">
+              <div>
+                <span className="eyebrow">new to the market</span>
+                <h3 id="pit-ipos">IPO watch</h3>
+              </div>
+              <p>An IPO is the first public sale of a private company&apos;s stock. The opening price can move far beyond the advertised range.</p>
+            </div>
+
+            <div className="pit-card-grid pit-ipo-grid">
+              {marketDesk.ipos.map((item) => (
+                <article className="pit-learning-card" key={item.ticker}>
+                  <header>
+                    <span className="pit-ticker">{item.ticker}</span>
+                    <time>{item.expectedDate}</time>
+                  </header>
+                  <h4>{item.company}</h4>
+                  <strong className="pit-price-range">{item.priceRange}</strong>
+                  <p>{item.whatItDoes}</p>
+                  <aside className="pit-translation">
+                    <span>What this means</span>
+                    <p>{item.beginnerTakeaway}</p>
+                  </aside>
+                  <a href={item.source.url} target="_blank" rel="noopener noreferrer">
+                    {item.source.label} ↗
+                  </a>
+                </article>
+              ))}
+            </div>
+          </section>
         </div>
       </section>
     </>

@@ -1,13 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { dailyNewsBrief } from "@/data/dailyNews";
+import type { DailyNewsBrief } from "@/lib/news";
+import { categoryId } from "@/lib/news";
 
-function categoryId(name: string) {
-  return `news-${name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
-}
+type AboutProps = {
+  brief: DailyNewsBrief;
+  archived?: boolean;
+};
 
-export default function About() {
+export default function About({ brief, archived = false }: AboutProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -44,19 +47,22 @@ export default function About() {
               Tonight&apos;s News
             </h2>
           </div>
-          <time className="news-date" dateTime={dailyNewsBrief.dateTime}>
-            {dailyNewsBrief.date}
-            <span>Filed at 7:00 PM ET</span>
-          </time>
+          <div className="news-date-wrap">
+            <time className="news-date" dateTime={brief.dateTime}>
+              {brief.date}
+              <span>Filed at 7:00 PM ET</span>
+            </time>
+            <Link href="/news">{archived ? "Back to archive" : "Browse archive"} →</Link>
+          </div>
         </header>
 
         <div className="news-one-line reveal">
           <span>Tonight in one line</span>
-          <p>{dailyNewsBrief.summary}</p>
+          <p>{brief.summary}</p>
         </div>
 
         <nav className="news-index reveal" aria-label="News categories">
-          {dailyNewsBrief.categories.map((category) => (
+          {brief.categories.map((category) => (
             <a key={category.name} href={`#${categoryId(category.name)}`}>
               {category.name}
               <span>{category.stories.length}</span>
@@ -65,7 +71,7 @@ export default function About() {
         </nav>
 
         <div className="news-categories">
-          {dailyNewsBrief.categories.map((category, categoryIndex) => (
+          {brief.categories.map((category, categoryIndex) => (
             <section
               className="news-category reveal"
               id={categoryId(category.name)}
@@ -81,7 +87,7 @@ export default function About() {
 
               <div className="news-story-list">
                 {category.stories.map((story, storyIndex) => {
-                  const previousStoryCount = dailyNewsBrief.categories
+                  const previousStoryCount = brief.categories
                     .slice(0, categoryIndex)
                     .reduce((total, previousCategory) => total + previousCategory.stories.length, 0);
                   const displayNumber = String(previousStoryCount + storyIndex + 1).padStart(2, "0");

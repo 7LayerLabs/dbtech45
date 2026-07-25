@@ -1,3 +1,5 @@
+import filedThisWeek from "@/data/filedThisWeek.json";
+
 export default function Hero() {
   const date = new Date().toLocaleDateString("en-US", {
     weekday: "long",
@@ -49,24 +51,22 @@ export default function Hero() {
 
           <aside>
             <div className="label">Filed This Week</div>
-            <ul className="typewriter" style={{ listStyle: "none", padding: 0, margin: 0, fontSize: 14 }}>
-              <li style={{ borderTop: "2px solid var(--ink)", padding: "10px 0" }}>
-                <strong>tickR</strong> trade journal v2 shipped to beta cohort.
-              </li>
-              <li style={{ borderTop: "1px solid rgba(0,0,0,0.2)", padding: "10px 0" }}>
-                <strong>Signal &amp; Noise</strong> daily wire crossed 1,200 subs.
-              </li>
-              <li style={{ borderTop: "1px solid rgba(0,0,0,0.2)", padding: "10px 0" }}>
-                <strong>MenuSparks</strong> vendor pricing upload live.
-              </li>
-              <li style={{ borderTop: "1px solid rgba(0,0,0,0.2)", padding: "10px 0" }}>
-                <strong>Milo</strong> routed 4,118 agent tasks last month.
-              </li>
-              <li style={{ borderTop: "1px solid rgba(0,0,0,0.2)", borderBottom: "2px solid var(--ink)", padding: "10px 0" }}>
-                <strong>Bobby</strong> flagged ES 5,480 breakout Monday 9:34 ET.
-              </li>
+            <ul className="filed-list typewriter">
+              {filedThisWeek.entries.map((entry) => (
+                <li key={`${entry.date}-${entry.project}`}>
+                  <time dateTime={entry.date}>
+                    {new Intl.DateTimeFormat("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      timeZone: "UTC",
+                    }).format(new Date(`${entry.date}T12:00:00Z`))}
+                  </time>
+                  <a href={entry.url} target="_blank" rel="noopener noreferrer">
+                    <strong>{entry.project}</strong> {entry.text} ↗
+                  </a>
+                </li>
+              ))}
             </ul>
-            <p className="sharpie" style={{ fontSize: 20, marginTop: 10 }}>see page 3</p>
           </aside>
         </div>
 
