@@ -1,83 +1,47 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [isMobileMenuOpen]);
+  const [open, setOpen] = useState(false);
 
   const navItems = [
-    { label: "about", href: "#about" },
-    { label: "projects", href: "#projects" },
-    { label: "swarm", href: "#swarm" },
-    { label: "agents", href: "/agents" },
-    { label: "ops", href: "/ops" },
-    { label: "os", href: "/os" },
+    { label: "Story", href: "#about" },
+    { label: "Roster", href: "#projects" },
+    { label: "Swarm", href: "#swarm" },
+    { label: "The Pit", href: "#pit" },
+    { label: "Subscribe", href: "#newsletter" },
+    { label: "Wire", href: "#connect" },
   ];
 
   return (
-    <>
-      <nav className={`nav ${isScrolled ? 'scrolled' : ''}`} role="navigation" aria-label="Main navigation">
-        <div className="nav-inner">
-          <div className="nav-brand">
-            <a href="#" className="nav-logo" aria-label="DBTech45 Home">
-              <span className="prompt">~/</span>DBTech45
-            </a>
-            <span className="nav-tagline">
-              <span className="tagline-prompt">&gt;</span>
-              <span className="tagline-text">Imagination → Implementation</span>
-              <span className="tagline-cursor">_</span>
-            </span>
-          </div>
-          <ul className="nav-links">
-            {navItems.map((item) => (
-              <li key={item.label}>
-                <a href={item.href}>
-                  <span className="nav-prompt">&gt;</span> {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <button
-            className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`}
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-      </nav>
+    <header className="nav-wrap">
+      <div className="nav-inner">
+        <a href="#" className="nav-logo" aria-label="DBTech45 home">
+          <span>DBTech45</span>
+          <span className="sharpie" style={{ fontSize: 16, marginLeft: 4 }}>/ almanac</span>
+        </a>
 
-      <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`} role="dialog" aria-label="Mobile navigation">
-        {navItems.map((item) => (
-          <a
-            key={item.label}
-            href={item.href}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            <span className="nav-prompt">&gt;</span> {item.label}
-          </a>
-        ))}
+        <ul className={`nav-links ${open ? "open" : ""}`}>
+          {navItems.map((item) => (
+            <li key={item.label}>
+              <a href={item.href} onClick={() => setOpen(false)}>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <button
+          className="hamburger"
+          aria-label="Toggle menu"
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
-    </>
+    </header>
   );
 }
