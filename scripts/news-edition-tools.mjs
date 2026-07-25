@@ -42,8 +42,8 @@ export function validateEdition(edition) {
 
   const storyUrls = new Set();
   for (const category of edition.categories) {
-    if (!Array.isArray(category.stories) || category.stories.length === 0) {
-      throw new Error(`${category.name} must contain at least one story`);
+    if (!Array.isArray(category.stories)) {
+      throw new Error(`${category.name} stories must be an array`);
     }
 
     for (const story of category.stories) {

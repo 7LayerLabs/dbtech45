@@ -39,6 +39,12 @@ test("publisher rejects an edition with a missing desk", () => {
   assert.throws(() => validateEdition(invalid), /five permanent news desks/);
 });
 
+test("publisher allows a quiet desk to remain empty instead of inventing filler", () => {
+  const quiet = edition("2026-07-25");
+  quiet.categories.at(-1).stories = [];
+  assert.doesNotThrow(() => validateEdition(quiet));
+});
+
 test("publisher replaces a same-day edition without duplicating it", () => {
   const existing = [edition("2026-07-24")];
   const first = mergeEdition(existing, edition("2026-07-25", "First filing"));
