@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { Mail } from "lucide-react";
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -21,40 +20,37 @@ export default function Contact() {
   }, []);
 
   return (
-    <>
-      <hr className="section-divider" />
-      <section className="section" id="connect" aria-label="Contact section" ref={sectionRef}>
-        <div className="container">
-          <div className="reveal" style={{ textAlign: "center" }}>
-            <p className="section-command-clean" style={{ justifyContent: "center" }}>&gt; contact</p>
-            <h2 className="section-title">Open a Channel</h2>
-            <p className="section-subtitle" style={{ margin: "0 auto" }}>
-              Got a project? Want to collaborate? Always open to interesting conversations.
-            </p>
-          </div>
-          <div className="connect-options reveal">
-            {/* Email Card */}
-            <a href="mailto:hello@dbtech45.com" className="connect-card">
-              <div className="connect-card-icon">
-                <Mail size={32} strokeWidth={1.5} />
-              </div>
-              <h3 className="connect-card-title">Email</h3>
-              <p className="connect-card-desc">hello@dbtech45.com</p>
-            </a>
-
-            {/* X/Twitter Card */}
-            <a href="https://x.com/dbtech45" className="connect-card" target="_blank" rel="noopener noreferrer">
-              <div className="connect-card-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </div>
-              <h3 className="connect-card-title">X</h3>
-              <p className="connect-card-desc">@dbtech45</p>
-            </a>
-          </div>
+    <section className="ink-section" id="connect" aria-label="Contact" ref={sectionRef}>
+      <div className="wrap">
+        <div className="reveal" style={{ marginBottom: 20 }}>
+          <div className="label">Section VI. The Wire</div>
+          <h2 className="display-md">Reach the desk.</h2>
+          <p className="typewriter" style={{ fontSize: 15, marginTop: 8, maxWidth: 640 }}>
+            Got a project? Want to collaborate? Trading idea worth arguing over?
+            Two ways in. Both answered personally.
+          </p>
         </div>
-      </section>
-    </>
+
+        <div className="cols-equal reveal">
+          <a href="mailto:hello@dbtech45.com" className="slip" style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+            <div className="label">By Post</div>
+            <h3 style={{ fontSize: 32, marginBottom: 6 }}>Email</h3>
+            <p className="typewriter" style={{ fontSize: 16 }}>hello@dbtech45.com</p>
+            <p className="sharpie" style={{ fontSize: 20, marginTop: 10, transform: "rotate(-2deg)", display: "inline-block" }}>
+              I read everything.
+            </p>
+          </a>
+
+          <a href="https://x.com/dbtech45" target="_blank" rel="noopener noreferrer" className="slip" style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+            <div className="label">By Wire</div>
+            <h3 style={{ fontSize: 32, marginBottom: 6 }}>X / @dbtech45</h3>
+            <p className="typewriter" style={{ fontSize: 16 }}>Fastest way to get a reply.</p>
+            <p className="sharpie" style={{ fontSize: 20, marginTop: 10, transform: "rotate(-1deg)", display: "inline-block" }}>
+              DMs open.
+            </p>
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }

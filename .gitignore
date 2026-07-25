@@ -47,3 +47,4 @@ public/os/gateway-status.json
 
 # yt-dlp binary (downloaded during build)
 /bin/yt-dlp*
+.gstack/

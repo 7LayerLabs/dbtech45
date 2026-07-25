@@ -1,5 +1,11 @@
 "use client";
+
 import { useEffect, useRef } from "react";
+import { dailyNewsBrief } from "@/data/dailyNews";
+
+function categoryId(name: string) {
+  return `news-${name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
+}
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -11,60 +17,112 @@ export default function About() {
           if (entry.isIntersecting) entry.target.classList.add("visible");
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     );
+
     if (sectionRef.current) {
-      sectionRef.current.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      sectionRef.current
+        .querySelectorAll(".reveal")
+        .forEach((element) => observer.observe(element));
     }
+
     return () => observer.disconnect();
   }, []);
 
   return (
-    <>
-      <hr className="section-divider" />
-      <section className="section" id="about" aria-label="About section" ref={sectionRef}>
-        <div className="container">
-          <div className="reveal">
-            <p className="section-command-clean">&gt; about</p>
-            <h2 className="section-title">The Story</h2>
+    <section
+      className="ink-section news-brief"
+      id="about"
+      aria-labelledby="daily-news-title"
+      ref={sectionRef}
+    >
+      <div className="wrap">
+        <header className="news-brief-header reveal">
+          <div>
+            <div className="label">The 7 PM File · Daily Briefing</div>
+            <h2 className="display-md" id="daily-news-title">
+              Tonight&apos;s News
+            </h2>
           </div>
-          <div className="about-grid">
-            <div className="about-bio reveal">
-              <p>
-                I didn't go to MIT. I went to the school of <strong>"figure it out or go broke trying."</strong>
-              </p>
-              <p>
-                By day I'm in the pit &mdash; trading futures, reading macro, building conviction. By night I'm shipping code with a swarm of AI agents who never sleep. In between, I'm raising 7 kids and running restaurants.
-              </p>
-              <p>
-                People say I'm spread too thin. I say I'm fueled by caffeine and chaos.
-              </p>
-            </div>
-            <div className="stats-grid reveal">
-              <div className="stat-card">
-                <div className="stat-number">7</div>
-                <div className="stat-label">Kids</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">4</div>
-                <div className="stat-label">Restaurants</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">10</div>
-                <div className="stat-label">AI Agents</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">∞</div>
-                <div className="stat-label">Coffee</div>
-              </div>
-            </div>
-          </div>
-          <blockquote className="about-quote reveal">
-            "You don't need a CS degree. You need a problem that pisses you off and the stubbornness to solve it."
-            <span className="attribution">&mdash; Derek Bobola</span>
-          </blockquote>
+          <time className="news-date" dateTime={dailyNewsBrief.dateTime}>
+            {dailyNewsBrief.date}
+            <span>Filed at 7:00 PM ET</span>
+          </time>
+        </header>
+
+        <div className="news-one-line reveal">
+          <span>Tonight in one line</span>
+          <p>{dailyNewsBrief.summary}</p>
         </div>
-      </section>
-    </>
+
+        <nav className="news-index reveal" aria-label="News categories">
+          {dailyNewsBrief.categories.map((category) => (
+            <a key={category.name} href={`#${categoryId(category.name)}`}>
+              {category.name}
+              <span>{category.stories.length}</span>
+            </a>
+          ))}
+        </nav>
+
+        <div className="news-categories">
+          {dailyNewsBrief.categories.map((category, categoryIndex) => (
+            <section
+              className="news-category reveal"
+              id={categoryId(category.name)}
+              key={category.name}
+              aria-labelledby={`${categoryId(category.name)}-title`}
+            >
+              <div className="news-category-heading">
+                <h3 id={`${categoryId(category.name)}-title`}>{category.name}</h3>
+                <span>
+                  {category.stories.length} {category.stories.length === 1 ? "story" : "stories"}
+                </span>
+              </div>
+
+              <div className="news-story-list">
+                {category.stories.map((story, storyIndex) => {
+                  const previousStoryCount = dailyNewsBrief.categories
+                    .slice(0, categoryIndex)
+                    .reduce((total, previousCategory) => total + previousCategory.stories.length, 0);
+                  const displayNumber = String(previousStoryCount + storyIndex + 1).padStart(2, "0");
+
+                  return (
+                    <article className="news-story" key={story.headline}>
+                      <div className="news-story-number" aria-hidden="true">
+                        {displayNumber}
+                      </div>
+                      <div className="news-story-body">
+                        <h4>
+                          <a href={story.url} target="_blank" rel="noopener noreferrer">
+                            {story.headline}
+                            <span className="news-external" aria-hidden="true">
+                              ↗
+                            </span>
+                          </a>
+                        </h4>
+                        <p>{story.brief}</p>
+                        <div className="news-sources">
+                          <span>Sources</span>
+                          {story.sources.map((source) => (
+                            <a
+                              href={source.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              key={source.url}
+                            >
+                              {source.label}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

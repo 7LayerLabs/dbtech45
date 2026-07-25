@@ -1,36 +1,66 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Space_Grotesk, Plus_Jakarta_Sans } from "next/font/google";
+import {
+  Oswald,
+  Special_Elite,
+  Permanent_Marker,
+  Playfair_Display,
+  UnifrakturMaguntia,
+  Zilla_Slab,
+} from "next/font/google";
 import "./globals.css";
+import "./brand.css";
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-  weight: ["400", "500", "700"],
-});
-
-const spaceGrotesk = Space_Grotesk({
+const oswald = Oswald({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const specialElite = Special_Elite({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400"],
+});
+
+const permanentMarker = Permanent_Marker({
+  subsets: ["latin"],
+  variable: "--font-sharpie",
+  display: "swap",
+  weight: ["400"],
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-editorial",
+  display: "swap",
+  weight: ["400", "700", "900"],
+  style: ["normal", "italic"],
+});
+
+const unifraktur = UnifrakturMaguntia({
+  subsets: ["latin"],
+  variable: "--font-blackletter",
+  display: "swap",
+  weight: ["400"],
+});
+
+const zilla = Zilla_Slab({
+  subsets: ["latin"],
+  variable: "--font-slab",
+  display: "swap",
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "DBTech45 - Fueled by Caffeine and Chaos",
+  title: "DBTech45, Fueled by Caffeine and Chaos",
   description:
-    "Derek Bobola - Dad of 7. Futures trader. Restaurant owner. Self-taught builder running 9 AI agents. Shipping daily.",
+    "Derek Bobola. Dad of 7. Futures trader. Restaurant owner. Self-taught builder running a swarm of AI agents. Shipping daily.",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0A0A0B",
+  themeColor: "#F7E79A",
 };
 
 export default function RootLayout({
@@ -39,7 +69,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jetbrainsMono.variable} ${spaceGrotesk.variable} ${plusJakartaSans.variable}`}>
+    <html
+      lang="en"
+      className={`${oswald.variable} ${specialElite.variable} ${permanentMarker.variable} ${playfair.variable} ${unifraktur.variable} ${zilla.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

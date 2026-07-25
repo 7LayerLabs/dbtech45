@@ -1,6 +1,28 @@
 "use client";
 import { useEffect, useRef } from "react";
 
+type Status = "live" | "building" | "shaping" | "spark";
+
+interface Project {
+  name: string;
+  desc: string;
+  status: Status;
+  art: string;
+  note?: string;
+}
+
+const PROJECTS: Project[] = [
+  { name: "tickR",              desc: "AI trading dashboard with real-time signals, journaling, and performance analytics.", status: "building", art: "/brand/project-tickr.jpg",        note: "beta cohort: 42" },
+  { name: "Signal & Noise",     desc: "Daily market newsletter. Filtering noise into actionable intelligence.",              status: "live",     art: "/brand/project-signalnoise.jpg", note: "subs: 1,213" },
+  { name: "Soul Solace",        desc: "AI wellness companion. Daily reflections, guided prayers, mood tracking.",            status: "building", art: "/brand/project-soulsolace.jpg",  note: "TestFlight soon" },
+  { name: "Sunday Squares",     desc: "Digital football pools with auto scoring and real time payouts.",                     status: "live",     art: "/brand/project-sundaysquares.jpg", note: "week 8" },
+  { name: "MenuSparks",         desc: "AI menu optimization for restaurants. Real food cost on every recipe.",               status: "building", art: "/brand/project-menusparks.jpg",  note: "v2 in flight" },
+  { name: "TipSplit Pro",       desc: "Tip calculation and splitting tool built for restaurant workers.",                    status: "live",     art: "/brand/project-signalnoise.jpg", note: "App Store live" },
+  { name: "Boundless",          desc: "AI journaling app. Deeper thinking through guided prompts.",                          status: "building", art: "/brand/project-soulsolace.jpg",  note: "private beta" },
+  { name: "Kitchen Cost Tracker", desc: "Food cost and inventory management for multi unit operators.",                      status: "building", art: "/brand/project-menusparks.jpg",  note: "Bobola use case" },
+  { name: "Receipt Scanner",    desc: "Snap a receipt, extract line items, categorize expenses. OCR meets organization.",     status: "shaping",  art: "/brand/project-tickr.jpg",       note: "scoping" },
+];
+
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -19,91 +41,58 @@ export default function Projects() {
     return () => observer.disconnect();
   }, []);
 
-  const projects = [
-    {
-      name: "tickR",
-      desc: "AI-powered trading dashboard with real-time signals, journaling, and performance analytics.",
-      status: "building",
-    },
-    {
-      name: "Signal & Noise",
-      desc: "Daily market newsletter. Filtering noise into actionable intelligence.",
-      status: "live",
-    },
-    {
-      name: "Soul Solace",
-      desc: "AI wellness companion. Daily reflections, guided prayers, mood tracking.",
-      status: "building",
-    },
-    {
-      name: "Sunday Squares",
-      desc: "Digital football pools with auto-scoring and real-time payouts.",
-      status: "live",
-    },
-    {
-      name: "TipSplit Pro",
-      desc: "Tip calculation and splitting tool designed for restaurant industry workers.",
-      status: "live",
-    },
-    {
-      name: "Boundless",
-      desc: "AI journaling app. Deeper thinking through guided prompts.",
-      status: "building",
-    },
-    {
-      name: "Kitchen Cost Tracker",
-      desc: "Food cost and inventory management for multi-unit restaurant operators.",
-      status: "building",
-    },
-    {
-      name: "Receipt Scanner",
-      desc: "Snap a receipt, extract line items, categorize expenses. OCR meets organization.",
-      status: "shaping",
-    },
-    {
-      name: "AI Meal Planner",
-      desc: "Weekly meal planning powered by AI. Dietary preferences, budget, family size aware.",
-      status: "spark",
-    },
-    {
-      name: "Contractor Bidder",
-      desc: "Streamlined contractor bidding platform with scope management and comparison tools.",
-      status: "spark",
-    },
-    {
-      name: "Family Calendar AI",
-      desc: "Smart family scheduling that coordinates 9 people's lives with AI conflict resolution.",
-      status: "spark",
-    },
-  ];
-
   return (
-    <>
-      <hr className="section-divider" />
-      <section className="section" id="projects" aria-label="Projects section" ref={sectionRef}>
-        <div className="container">
-          <div className="reveal">
-            <p className="section-command-clean">&gt; projects</p>
-            <h2 className="section-title">What I'm Shipping</h2>
-            <p className="section-subtitle">
-              Real tools for real problems. If it's here, it's moving.
-            </p>
-          </div>
-          <div className="projects-grid">
-            {projects.map((project, index) => (
-              <div key={index} className="project-card reveal">
-                <div className="project-card-top">
-                  <h3 className="project-name">{project.name}</h3>
-                  <span className={`project-status status-${project.status}`}>
-                    {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
-                  </span>
-                </div>
-                <p className="project-desc">{project.desc}</p>
-              </div>
-            ))}
-          </div>
+    <section className="ink-section" id="projects" aria-label="Projects" ref={sectionRef}>
+      <div className="wrap">
+        <div className="reveal" style={{ marginBottom: 24 }}>
+          <div className="label">Section II. Roster</div>
+          <h2 className="display-md">The Project Roster</h2>
+          <p className="typewriter" style={{ fontSize: 15, marginTop: 10, maxWidth: 640 }}>
+            Nine live entries this print. Status is read as LIVE shipping, BUILDING
+            in the shop, SHAPING still on paper, SPARK caught but not lit.
+          </p>
+          <p className="sharpie" style={{ fontSize: 24, marginTop: 6, transform: "rotate(-2deg)", display: "inline-block" }}>
+            read top to bottom.
+          </p>
         </div>
-      </section>
-    </>
+
+        <div className="reveal" style={{ overflowX: "auto" }}>
+          <table className="almanac">
+            <thead>
+              <tr>
+                <th style={{ width: 70 }}>No.</th>
+                <th style={{ width: 80 }}>Plate</th>
+                <th>Entry</th>
+                <th>Line</th>
+                <th style={{ width: 180 }}>Note</th>
+                <th style={{ width: 110, textAlign: "right" }}>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {PROJECTS.map((p, i) => (
+                <tr key={p.name}>
+                  <td className="typewriter">{String(i + 1).padStart(2, "0")}</td>
+                  <td>
+                    <div className="thumb" style={{ backgroundImage: `url(${p.art})` }} />
+                  </td>
+                  <td>
+                    <div className="proj-name">{p.name}</div>
+                  </td>
+                  <td style={{ fontSize: 14 }}>{p.desc}</td>
+                  <td className="sharpie" style={{ fontSize: 18 }}>{p.note}</td>
+                  <td style={{ textAlign: "right" }}>
+                    <span className={`odds ${p.status}`}>{p.status}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="typewriter reveal" style={{ fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", marginTop: 14, opacity: 0.7 }}>
+          Roster updated weekly. Ship log on page 12.
+        </p>
+      </div>
+    </section>
   );
 }
