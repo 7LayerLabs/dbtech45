@@ -35,7 +35,11 @@ async function transcribeFile(audioPath: string): Promise<string> {
   for (let i = 0; i < chunks.length; i++) {
     const chunk = chunks[i];
     const formData = new FormData();
-    const blob = new Blob([chunk], { type: 'audio/mpeg' });
+    // Copy the Node Buffer into an ArrayBuffer-backed view accepted by Blob.
+    // The chunk is capped at 24 MB, so the bounded copy is safe here.
+    const bytes = new Uint8Array(chunk.length);
+    bytes.set(chunk);
+    const blob = new Blob([bytes.buffer], { type: 'audio/mpeg' });
     formData.append('file', blob, `chunk-${i}.mp3`);
     formData.append('model', 'whisper-1');
     formData.append('response_format', 'text');
