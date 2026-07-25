@@ -7,6 +7,7 @@ import ThePit from "@/components/ThePit";
 import Newsletter from "@/components/Newsletter";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { currentEdition } from "@/lib/news";
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <About />
+        <About brief={currentEdition} />
         <Projects />
         <TheTeam />
         <ThePit />
